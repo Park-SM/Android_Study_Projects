@@ -44,7 +44,7 @@ public class SignInActivity extends AsyncTask<String, Void, String> {
 
             while ((line = bf.readLine()) != null) {
                 sb.append(line);
-                break;
+                //break;
             }
 
             bf.close();
