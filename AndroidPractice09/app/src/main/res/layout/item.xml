@@ -12,6 +12,7 @@
         android:textSize="15dp"
         android:gravity="right"/>
 
+
     <TextView
         android:id="@+id/tvContext"
         android:layout_width="match_parent"

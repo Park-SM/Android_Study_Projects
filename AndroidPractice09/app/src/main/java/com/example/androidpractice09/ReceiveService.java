@@ -40,7 +40,10 @@ public class ReceiveService extends AsyncTask<Void, Void, String> {
             StringBuffer sb = new StringBuffer("");
             String line = "";
 
-            while ((line = br.readLine()) != null) sb.append(line);
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
 
             br.close();
             return sb.toString();
@@ -55,11 +58,10 @@ public class ReceiveService extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         if(!result.equals("Error")) {
             int i = 1;
-            for (String tempStr : result.split("<br>")) {
+            for (String tempStr : result.split("_END_LINE_PSM_")) {
                 this.list.add(new ContextItem(Integer.toString(i++) + ": ", tempStr));
             }
             Toast.makeText(this.context, "Success for load data from the server", Toast.LENGTH_SHORT).show();
-
             this.lvContext.setAdapter(new ItemAdapter(this.context, this.list));
 
         } else Toast.makeText(this.context, "Error: " + this.eMessage, Toast.LENGTH_LONG).show();

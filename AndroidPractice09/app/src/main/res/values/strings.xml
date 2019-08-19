@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidPractice09</string>
+    <string name="add_pre"><pre>%s</pre></string>
 </resources>

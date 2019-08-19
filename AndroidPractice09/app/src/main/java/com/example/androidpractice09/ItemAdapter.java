@@ -1,6 +1,8 @@
 package com.example.androidpractice09;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,11 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends ArrayAdapter<ContextItem> {
 
+    private Context context;
+
     public ItemAdapter(Context context, ArrayList<ContextItem> list) {
         super(context, 0, list);
+        this.context = context;
     }
 
     @Override
