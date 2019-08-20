@@ -40,7 +40,7 @@
                 android:id="@+id/tvContext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="5"
+                android:minLines="5"
                 android:text="Sample-context"
                 android:textSize="15dp" />
 
