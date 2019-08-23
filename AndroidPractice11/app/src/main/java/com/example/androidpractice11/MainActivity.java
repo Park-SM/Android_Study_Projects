@@ -2,6 +2,7 @@ package com.example.androidpractice11;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,25 +11,35 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.net.Uri;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView ivContext;
-    private Button btnGallery;
+    private Button btnGallery, btnSend;
     private static final int GET_FROM_GALLERY = 4146;
+    private static String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.imagePath = null;
         this.ivContext = (ImageView)findViewById(R.id.ivContext);
         this.ivContext.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         this.btnGallery = (Button)findViewById(R.id.btnGallery);
@@ -51,26 +62,34 @@ public class MainActivity extends AppCompatActivity {
             switch(requestCode) {
                 case GET_FROM_GALLERY:
 
-                    String realPath = getRealPathFromURI(data.getData());
+                    this.imagePath = getRealPathFromURI(data.getData());
 
-                    int degree = getExifOrientation(realPath);
+                    int degree = getExifOrientation(this.imagePath);
                     BitmapFactory.Options ops = new BitmapFactory.Options();
-                    Bitmap newBitmap = BitmapFactory.decodeFile(realPath, ops);
+                    Bitmap newBitmap = BitmapFactory.decodeFile(this.imagePath, ops);
                     newBitmap = Resizing(newBitmap, 512, 512);
                     newBitmap = getRotatedBitmap(newBitmap, degree);
 
 
                     this.ivContext.setImageBitmap(newBitmap);
 
-                    Toast.makeText(this, "Successfully set the image.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Successfully set the image.\nPATH:: " + this.imagePath, Toast.LENGTH_LONG).show();
                     break;
             }
         }
     }
 
+    public void SendImage(View view) {
+        if (this.imagePath != null) {
+            SubmitService ss = new SubmitService(MainActivity.this);
+            ss.execute(this.imagePath.toString());
+        } else Toast.makeText(this, "Failed To send to the server.", Toast.LENGTH_SHORT).show();
+    }
+
     public Bitmap Resizing(Bitmap targetBitmap, int reqWidth, int reqHeight) {
         int width = targetBitmap.getWidth();
         int height = targetBitmap.getHeight();
+
 
         if (width > reqWidth || height > reqHeight) {
             while (width / 2 > reqWidth && height / 2 > reqHeight) {
