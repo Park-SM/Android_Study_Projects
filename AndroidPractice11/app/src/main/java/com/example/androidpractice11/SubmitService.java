@@ -7,8 +7,6 @@ import android.widget.Toast;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.annotation.Target;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -39,7 +37,7 @@ public class SubmitService extends AsyncTask<String, Void, String> {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Connection", "Keep-Alive");
             conn.setRequestProperty("ENCTYPE", "multipart/form-data");
-            conn.setRequestProperty("Content-Type", "multipart/form-data");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
             conn.setRequestProperty("imageName", targetPath);
 
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
