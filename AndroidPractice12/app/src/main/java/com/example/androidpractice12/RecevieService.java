@@ -7,9 +7,6 @@ import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -35,11 +32,9 @@ public class RecevieService extends AsyncTask<Integer, Void, String> {
                 String link = "http://smparkworld.com/Android_images/" + i + ".jpg";
 
                 URL url = new URL(link);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                conn.setDoInput(true);
+                URLConnection conn = url.openConnection();
 
-                InputStream is = conn.getInputStream();
-                Bitmap tempBit = BitmapFactory.decodeStream(is);
+                Bitmap tempBit = BitmapFactory.decodeStream(conn.getInputStream());
                 this.list.add(tempBit);
             }
 
@@ -51,9 +46,28 @@ public class RecevieService extends AsyncTask<Integer, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        this.list = ListReSizing(this.list, 512, 512);
         ItemAdapter la = new ItemAdapter(this.context, this.list);
         this.lvContext.setAdapter(la);
-        Toast.makeText(this.context, result, Toast.LENGTH_LONG).show();
+        Toast.makeText(this.context, result, Toast.LENGTH_SHORT).show();
+    }
+
+    public ArrayList<Bitmap> ListReSizing(ArrayList<Bitmap> list, int uWidth, int uHeight) {
+        ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
+        int targetWidth = 0;
+        int targetHeight = 0;
+
+        for (int i = 0; i < list.size(); i++) {
+            targetWidth = list.get(i).getWidth();
+            targetHeight = list.get(i).getHeight();
+            while (targetWidth > uWidth && targetHeight > uHeight) {
+                targetWidth /= 2;
+                targetHeight /= 2;
+            }
+            imageList.add(Bitmap.createScaledBitmap(list.get(i), targetWidth, targetHeight, true));
+        }
+
+        return imageList;
     }
 
 }
