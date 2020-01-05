@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/etNewWriter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="작성자를 입력해주세요."/>
+
+    <EditText
+        android:id="@+id/etNewContext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="메모 내용을 입력해주세요."/>
+
+    <CheckBox
+        android:id="@+id/cbCurrentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="right"
+        android:hint="현재시간 사용"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etNewTimeData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnNewTimeData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etNewTimeTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnNewTimeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNewSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="submit"/>
+
+</LinearLayout>
