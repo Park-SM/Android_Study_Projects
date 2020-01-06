@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/omSearch"
+        android:icon="@drawable/search_icon"
+        android:title="Search"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/omRefresh"
+        android:icon="@drawable/refresh_icon"
+        android:title="Refresh"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/omAccount"
+        android:icon="@drawable/account_icon"
+        android:title="Account"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/omTest1"
+        android:title="test1"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/omTest2"
+        android:title="test2"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/omTest3"
+        android:title="test3"
+        app:showAsAction="never" />
+
+</menu>
