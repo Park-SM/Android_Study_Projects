@@ -17,6 +17,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Context context;
+
     private final int NOTIFICATION_ID = 100;
     private final String NOTIFICATION_CHANNEL_ID = "1000";
 
